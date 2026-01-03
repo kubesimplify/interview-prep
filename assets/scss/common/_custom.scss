@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "animations";
+
+// 1. CSS Variables for Advanced Theming (Kubesimplify Brand)
+:root {
+  --font-body: 'Outfit', sans-serif;
+  --color-primary: #00D1FF;
+  --color-accent: #6366f1;
+  --color-accent-2: #a855f7;
+
+  --bg-body-light: #F8FAFC;
+  --bg-card-light: #FFFFFF;
+  --text-primary-light: #1A1A1A;
+  --text-secondary-light: #4B5563;
+  --border-light: #E2E8F0;
+
+  --bg-body-dark: #0B0F19;
+  --bg-card-dark: #111625;
+  --text-primary-dark: #FFFFFF;
+  --text-secondary-dark: #94A3B8;
+  --border-dark: rgba(255, 255, 255, 0.08);
+
+  --ks-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --ks-glow: 0 0 20px rgba(0, 209, 255, 0.2);
+}
+
+// 2. SCSS Variable Overrides (Bootstrap/Doks)
+$font-family-sans-serif: 'Outfit', sans-serif;
+$primary: #6366f1;
+$body-bg: var(--bg-body-light);
+$body-color: var(--text-primary-light);
+
+// Polish Typography
+body {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
+
+// Dark Mode Support
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0B0F19 !important;
+  --bs-body-color: #FFFFFF !important;
+  background-color: var(--bg-body-dark) !important;
+  color: var(--text-primary-dark) !important;
+
+  .card,
+  .feature-card,
+  .premium-card {
+    background-color: var(--bg-card-dark) !important;
+    border-color: var(--border-dark) !important;
+    color: #fff;
+  }
+
+  .h1,
+  .h2,
+  .h3,
+  h1,
+  h2,
+  h3 {
+    color: #fff !important;
+  }
+}
+
+// 3. Premium Component Styles
+
+// Bento Grid Layout (Pure CSS Grid)
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 0;
+  align-items: stretch; // Ensure rows stretch
+}
+
+// Spans must be flex containers AND have height 100% to fill grid cell
+.bento-span-8,
+.bento-span-4,
+.bento-span-6 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bento-span-8 {
+  grid-column: span 8;
+}
+
+.bento-span-4 {
+  grid-column: span 4;
+}
+
+.bento-span-6 {
+  grid-column: span 6;
+}
+
+@media (max-width: 991px) {
+
+  .bento-span-8,
+  .bento-span-4,
+  .bento-span-6 {
+    grid-column: span 12;
+    height: auto; // Reset on mobile
+  }
+}
+
+// Contact Grid (Contributing Section)
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-card {
+  display: flex !important;
+  align-items: center;
+}
+
+// Premium Card
+.premium-card {
+  background: var(--bg-card-light);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+
+  // Flex layout for vertical filling
+  height: 100%;
+  width: 100%;
+  flex: 1 1 auto; // Grow to fill parent
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--color-accent);
+
+    .card-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--ks-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Typography Enhancements
+.gradient-text {
+  background: var(--ks-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+}
+
+.hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+}
+
+// Button Overrides
+.btn-primary {
+  background: var(--ks-gradient) !important;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  border-radius: 100px;
+  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--border-light);
+  color: var(--text-primary-light);
+  border-radius: 100px;
+
+  [data-bs-theme="dark"] & {
+    border-color: var(--border-dark);
+    color: #fff;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{{ define "main" }}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <!-- Main Content Column -->
+        <div class="col-lg-10">
+
+            <!-- Breadcrumb / Back Link -->
+            <div class="mb-4">
+                <a href="{{ .Parent.RelPermalink }}" class="text-decoration-none text-secondary">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Back to {{ .Parent.Title }}
+                </a>
+            </div>
+
+            <!-- Question Card -->
+            <div class="premium-card p-5 mb-5" style="border-top: 4px solid var(--color-accent);">
+                <h1 class="display-5 fw-bold mb-4">{{ .Title }}</h1>
+                <div class="content opacity-90" style="font-size: 1.1rem; line-height: 1.8;">
+                    {{ .Content }}
+                </div>
+            </div>
+
+            <!-- Next/Prev Navigation -->
+            <div class="d-flex justify-content-between mt-5">
+                {{ with .PrevInSection }}
+                <a href="{{ .RelPermalink }}" class="btn btn-secondary rounded-pill px-4">
+                    <i class="fa-solid fa-arrow-left me-2"></i> Previous Question
+                </a>
+                {{ else }}
+                <div></div>
+                {{ end }}
+
+                {{ with .NextInSection }}
+                <a href="{{ .RelPermalink }}" class="btn btn-primary rounded-pill px-4">
+                    Next Question <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+                {{ end }}
+            </div>
+
+        </div>
+    </div>
+</div>
+{{ end }}

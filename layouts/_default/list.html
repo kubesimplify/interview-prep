@@ -1,0 +1,59 @@
+{{ define "main" }}
+<section class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-4 fw-bold mb-3">{{ .Title }}</h1>
+            <p class="lead text-secondary">{{ .Params.description | default .Summary }}</p>
+        </div>
+    </div>
+
+    <div class="bento-grid">
+        {{/* 1. Check for Subsections (Branches) like Beginner/Expert */}}
+        {{ range .Sections }}
+        <div class="bento-span-6">
+            <a href="{{ .RelPermalink }}" class="text-decoration-none">
+                <div class="premium-card animate-fade-up" style="height: 100%;">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="card-icon me-3 text-primary fs-3 rounded-circle bg-primary-subtle p-3">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <h3 class="mb-1 fw-bold text-body">{{ .Title }}</h3>
+                            <span class="badge bg-light text-primary border">{{ len .Pages }} Questions</span>
+                        </div>
+                    </div>
+                    <p class="text-secondary flex-grow-1">
+                        {{ .Params.description | default "Click to explore interview questions in this category." }}
+                    </p>
+                    <span class="fw-bold text-primary mt-4 d-inline-flex align-items-center">
+                        Start Practicing <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </span>
+                </div>
+            </a>
+        </div>
+        {{ end }}
+
+        {{/* 2. Check for Regular Pages (Leaves) - The actual Questions */}}
+        {{ range .Pages }}
+        {{ if not .IsSection }}
+        <div class="bento-span-12">
+            <a href="{{ .RelPermalink }}" class="text-decoration-none">
+                <div class="premium-card animate-fade-up"
+                    style="height: 100%; border-left: 4px solid var(--color-accent);">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 fs-4 text-secondary">
+                                <i class="fa-regular fa-file-code"></i>
+                            </div>
+                            <h4 class="mb-0 fw-bold text-body">{{ .Title }}</h4>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-secondary opacity-50"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{ end }}
+        {{ end }}
+    </div>
+</section>
+{{ end }}
