@@ -1,0 +1,21 @@
+<footer class="footer text-muted">
+  <div class="container-{{ site.Params.doks.containerBreakpoint | default "lg" }}">
+    <div class="row">
+      <div class="col-lg-6 text-center text-lg-start">
+        <ul class="list-inline">
+          <li class="list-inline-item">{{ site.Params.copyRight | safeHTML }}</li>
+        </ul>
+        <ul class="list-inline">
+          {{ range .Site.Menus.footer -}}
+            <li class="list-inline-item"><a class="text-muted" href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+      <div class="col-lg-6 text-center text-lg-end">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://kubesimplify.com/">Powered by Kubesimplify</a> | <a href="https://github.com/kubesimplify/interview-prep">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

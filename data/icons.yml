@@ -1,0 +1,80 @@
+difficulty:
+    beginner:
+        label: 'Beginner'
+        icon: 'fa-solid fa-seedling'
+        color: '#3b82f6' # Tailwind blue-500
+        hex_alt: '3B82F6'
+        description: 'Foundation level - Getting started'
+        order: 1
+
+    advanced:
+        label: 'Advanced'
+        icon: 'fa-solid fa-rocket'
+        color: '#f59e0b' # Tailwind amber-500
+        hex_alt: 'F59E0B'
+        description: 'Intermediate level - Building expertise'
+        order: 2
+
+    expert:
+        label: 'Expert'
+        icon: 'fa-solid fa-dragon'
+        color: '#ef4444' # Tailwind red-500
+        hex_alt: 'EF4444'
+        description: 'Mastery level - Advanced engineering'
+        order: 3
+
+domains:
+    kubernetes:
+        label: 'Kubernetes'
+        icon: 'fa-solid fa-dharmachakra'
+        icon_unicode: 'U+2638'
+        color: '#0ea5e9' # Sky blue
+        hex_alt: '0EA5E9'
+        slug: 'k8s'
+        description: 'Container orchestration platform'
+        order: 1
+        is_active: true
+
+    devops:
+        label: 'DevOps'
+        icon: 'fa-solid fa-infinity'
+        icon_unicode: 'U+221E'
+        color: '#06b6d4' # Cyan
+        hex_alt: '06B6D4'
+        slug: 'devops'
+        description: 'Continuous integration & deployment'
+        order: 2
+        is_active: true
+
+    sre:
+        label: 'SRE'
+        icon: 'fa-solid fa-heart-pulse'
+        icon_unicode: 'U+1F6E1'
+        color: '#8b5cf6' # Purple
+        hex_alt: '8B5CF6'
+        slug: 'sre'
+        description: 'Site Reliability Engineering'
+        order: 3
+        is_active: true
+
+    cloud:
+        label: 'Cloud'
+        icon: 'fa-solid fa-cloud'
+        icon_unicode: 'U+2601'
+        color: '#06b6d4'
+        hex_alt: '06B6D4'
+        slug: 'cloud'
+        description: 'Cloud infrastructure & platforms'
+        order: 4
+        is_active: true
+
+    platform_engineering:
+        label: 'Platform Engineering'
+        icon: 'fa-solid fa-layer-group'
+        icon_unicode: 'U+1F3D7'
+        color: '#10b981' # Green
+        hex_alt: '10B981'
+        slug: 'platform'
+        description: 'Internal developer platforms'
+        order: 5
+        is_active: true

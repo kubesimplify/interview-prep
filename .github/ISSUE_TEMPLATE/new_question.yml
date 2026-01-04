@@ -1,0 +1,55 @@
+name: New Interview Question
+description: Submit a new interview question for the repository
+title: "[New Question]: "
+labels: ["new-question", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! Please check if this question already exists before submitting.
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - DevOps
+        - SRE
+        - Kubernetes
+      required: true
+
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty Level
+      options:
+        - Beginner
+        - Advanced
+        - Expert
+      required: true
+
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: Describe the real-world situation or context.
+      placeholder: "Example: A pod is in CrashLoopBackOff state..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: The actual question asked to the candidate.
+      placeholder: "How would you debug this?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: answer
+    attributes:
+      label: Expected Answer / Key Points
+      description: Brief outline of what the answer should cover.
+    validations:
+      required: true

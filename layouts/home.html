@@ -1,0 +1,154 @@
+{{ define "main" }}
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Hero Section -->
+<div class="hero-section pt-5 pb-5">
+  <div class="hero-content text-center mx-auto" style="max-width: 800px;">
+    <!-- Kicker Badge -->
+    <span
+      class="hero-kicker d-inline-block mb-3 px-3 py-1 rounded-pill bg-light text-primary border border-primary-subtle fw-bold"
+      style="font-size: 0.9rem; letter-spacing: 0.5px;">
+      <i class="fa-solid fa-code-branch me-2"></i>Product of Kubesimplify
+    </span>
+
+    <!-- Title -->
+    <h1 class="hero-title mb-4">Unlock Your <span class="gradient-text">Cloud Native</span> Potential</h1>
+
+    <!-- Description -->
+    <p class="hero-description lead mb-5 text-secondary mx-auto" style="max-width: 700px; font-size: 1.25rem;">
+      {{ .Params.lead | default `Curated interview scenarios for DevOps, SRE, and Kubernetes roles. From Beginner to
+      Advanced, master real-world challenges with our expert-led platform.` }}
+    </p>
+
+    <!-- Actions -->
+    <div class="hero-actions d-flex gap-3 justify-content-center">
+      <a href="/start-learning/" class="btn btn-primary btn-lg px-4">
+        <i class="fa-solid fa-rocket me-2"></i> Start Learning
+      </a>
+      <a href="https://github.com/kubesimplify/interview-prep" class="btn btn-secondary btn-lg px-4">
+        <i class="fa-brands fa-github"></i> Star on GitHub
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Bento Grid Features Section -->
+<section class="container py-5">
+  <div class="bento-grid">
+
+    <!-- Large Card: Real World Scenarios -->
+    <div class="bento-span-8">
+      <div class="premium-card" style="height: 100%;">
+        <div class="d-flex align-items-center mb-4">
+          <div class="card-icon me-3 text-primary fs-3 rounded-circle bg-primary-subtle p-3">
+            <i class="fa-solid fa-server"></i>
+          </div>
+          <div>
+            <h3 class="mb-1 fw-bold">Production Scenarios</h3>
+            <span class="badge bg-light text-primary border">Beginner to Expert</span>
+          </div>
+        </div>
+        <p class="text-secondary flex-grow-1 lead" style="font-size: 1.1rem;">
+          Move beyond theory. We provide detailed <strong>production-grade incidents</strong>, post-mortems, and
+          architectural decision-making challenges used in top-tier tech interviews.
+        </p>
+        <a href="/sre/beginner/"
+          class="text-decoration-none fw-bold text-primary mt-4 d-inline-flex align-items-center">
+          Explore SRE Track <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Small Card: Community -->
+    <div class="bento-span-4">
+      <div class="premium-card bg-gradient-primary-soft" style="height: 100%;">
+        <div class="card-icon mb-3 fs-2 text-warning">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <h3 class="h4 fw-bold">Community Powered</h3>
+        <p class="small text-secondary flex-grow-1">
+          A <strong>Kubesimplify</strong> initiative. Join thousands of engineers contributing questions and reviewing
+          answers.
+        </p>
+      </div>
+    </div>
+
+    <!-- Medium Card: Kubernetes -->
+    <div class="bento-span-6">
+      <div class="premium-card" style="height: 100%;">
+        <div class="card-icon mb-3 fs-2 text-info">
+          <i class="fa-solid fa-dharmachakra"></i>
+        </div>
+        <h3 class="fw-bold">Kubernetes Tracks</h3>
+        <p class="text-secondary flex-grow-1">
+          Comprehensive coverage for <strong>CKA, CKAD, and CKS</strong> certifications, plus advanced cluster debugging
+          and security scenarios.
+        </p>
+      </div>
+    </div>
+
+    <!-- Medium Card: DevOps -->
+    <div class="bento-span-6">
+      <div class="premium-card" style="height: 100%;">
+        <div class="card-icon mb-3 fs-2 text-success">
+          <i class="fa-solid fa-infinity"></i>
+        </div>
+        <h3 class="fw-bold">DevOps & Cloud</h3>
+        <p class="text-secondary flex-grow-1">
+          Master CI/CD pipelines, <strong>Terraform</strong> state management, Ansible playbooks, and GitOps workflows.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Community Guidelines Section (From README) -->
+<section class="container py-5 mt-4 border-top" style="border-color: var(--border-light) !important;">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold display-6">Contributing to the Platform</h2>
+        <p class="text-secondary lead">We welcome contributions! Here is how you can help build the ultimate interview
+          repository.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="premium-card contact-card" style="height: 100%;">
+          <div class="me-3 fs-2 text-primary">1</div>
+          <div>
+            <h4 class="fw-bold">Share Your Ideas</h4>
+            <p class="text-secondary mb-0">Add your questions to our <a
+                href="https://docs.google.com/document/d/1B2wwVwoCUBNquuOhYEr6TZ54pfDTF-JByO2YW_Xaj1M/edit?tab=t.0"
+                target="_blank" class="text-primary">Ideas Google
+                Doc</a>.</p>
+          </div>
+        </div>
+        <div class="premium-card contact-card" style="height: 100%;">
+          <div class="me-3 fs-2 text-primary">2</div>
+          <div>
+            <h4 class="fw-bold">Create an Issue</h4>
+            <p class="text-secondary mb-0">Open a GitHub issue to discuss your contribution.</p>
+          </div>
+        </div>
+        <div class="premium-card contact-card" style="height: 100%;">
+          <div class="me-3 fs-2 text-primary">3</div>
+          <div>
+            <h4 class="fw-bold">Submit a PR</h4>
+            <p class="text-secondary mb-0">Create a Pull Request with clear explanations.</p>
+          </div>
+        </div>
+        <div class="premium-card contact-card" style="height: 100%;">
+          <div class="me-3 fs-2 text-primary">4</div>
+          <div>
+            <h4 class="fw-bold">Review & Merge</h4>
+            <p class="text-secondary mb-0">Maintainers will review your work.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{{ end }}
