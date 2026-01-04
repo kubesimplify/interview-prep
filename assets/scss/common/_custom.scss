@@ -1,0 +1,596 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap");
+
+// 1. CSS Variables for Advanced Theming (Kubesimplify Brand)
+:root {
+    --font-body: "Outfit", sans-serif;
+    --color-primary: #00d1ff;
+    --color-accent: #6366f1;
+    --color-accent-2: #a855f7;
+
+    --bg-body-light: #f8fafc;
+    --bg-card-light: #ffffff;
+    --text-primary-light: #1a1a1a;
+    --text-secondary-light: #4b5563;
+    --border-light: #e2e8f0;
+
+    --bg-body-dark: #0b0f19;
+    --bg-card-dark: #111625;
+    --text-primary-dark: #ffffff;
+    --text-secondary-dark: #94a3b8;
+    --border-dark: rgba(255, 255, 255, 0.08);
+
+    --ks-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    --ks-glow: 0 0 20px rgba(0, 209, 255, 0.2);
+}
+
+// 2. SCSS Variable Overrides (Bootstrap/Doks)
+$font-family-sans-serif: "Outfit", sans-serif;
+$primary: #6366f1;
+$body-bg: var(--bg-body-light);
+$body-color: var(--text-primary-light);
+
+// Polish Typography
+body {
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+}
+
+// Dark Mode Support
+[data-bs-theme="dark"] {
+    --bs-body-bg: #0b0f19 !important;
+    --bs-body-color: #ffffff !important;
+    background-color: var(--bg-body-dark) !important;
+    color: var(--text-primary-dark) !important;
+
+    .card,
+    .feature-card,
+    .premium-card {
+        background-color: var(--bg-card-dark) !important;
+        border-color: var(--border-dark) !important;
+        color: #fff;
+    }
+
+    .h1,
+    .h2,
+    .h3,
+    h1,
+    h2,
+    h3 {
+        color: #fff !important;
+    }
+}
+
+// 3. Premium Component Styles
+
+// Bento Grid Layout (Pure CSS Grid)
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    padding: 2rem 0;
+    align-items: stretch; // Ensure rows stretch
+}
+
+// Spans must be flex containers AND have height 100% to fill grid cell
+.bento-span-8,
+.bento-span-4,
+.bento-span-6 {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bento-span-8 {
+    grid-column: span 8;
+}
+
+.bento-span-4 {
+    grid-column: span 4;
+}
+
+.bento-span-6 {
+    grid-column: span 6;
+}
+
+@media (max-width: 991px) {
+    .bento-span-8,
+    .bento-span-4,
+    .bento-span-6 {
+        grid-column: span 12;
+        height: auto; // Reset on mobile
+    }
+}
+
+// Contact Grid (Contributing Section)
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-card {
+    display: flex !important;
+    align-items: center;
+}
+
+// Premium Card
+.premium-card {
+    background: var(--bg-card-light);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+
+    // Flex layout for vertical filling
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto; // Grow to fill parent
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+    &:hover {
+        box-shadow:
+            0 20px 25px -5px rgba(0, 0, 0, 0.1),
+            0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-color: var(--color-accent);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--ks-gradient);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+}
+
+// Typography Enhancements
+.gradient-text {
+    background: var(--ks-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+}
+
+// Button Overrides
+.btn-primary {
+    background: var(--ks-gradient) !important;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    border-radius: 100px;
+    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5); // Enhanced glow
+    }
+}
+
+.btn-secondary {
+    // 1. Structure & Alignment
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 54px; // Matches standard btn-lg height usually
+    line-height: 1;
+
+    // 2. Styling
+    background: transparent;
+    border: 2px solid var(--border-light);
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    color: var(--text-primary-light);
+    font-weight: 600;
+    letter-spacing: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    // 3. Interaction
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Icon handling
+    i,
+    svg {
+        display: flex;
+        font-size: 1.1em;
+    }
+
+    // Hover State
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.5);
+        border-color: #dbeafe; // Light blue tint shift
+        color: var(--text-primary-light);
+    }
+
+    // Active State
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-bs-theme="dark"] & {
+        border-color: var(--border-dark);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+// 4. Sticky Footer Fix
+body {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+// The main container that wraps content
+.wrap {
+    flex: 1 0 auto;
+    width: 100%; // Ensure it takes full width
+}
+
+// The footer element
+// ... (previous content)
+
+// ... (previous content)
+
+// 6. Question Detail Page Styles
+
+// Breadcrumb
+.breadcrumb-item a {
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: var(--color-primary);
+    }
+}
+
+// Meta Header
+.question-meta-header {
+    border-bottom-color: var(--border-light) !important;
+}
+
+// Section Styling (Dynamic JS Wrappers)
+.content-section-wrapper {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        color: var(--text-primary-light);
+    }
+
+    // 1. Scenario Section
+    &.section-scenario {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-left: 4px solid #3b82f6;
+
+        h3::before {
+            content: "📋";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+    }
+
+    // 2. Question Section
+    &.section-question {
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        border-left: 4px solid #f59e0b;
+
+        h3 {
+            color: #92400e;
+        }
+
+        h3::before {
+            content: "❓";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        // Make question text slightly larger/clearer
+        p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1f2937;
+        }
+    }
+
+    // 3. Answer Section
+    &.section-answer {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-left: 4px solid #10b981;
+
+        h3 {
+            color: #166534;
+        }
+
+        h3::before {
+            content: "✅";
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+    }
+
+    // 4. Generic Section
+    &.section-generic {
+        background: var(--bg-card-light);
+        border: 1px solid var(--border-light);
+        border-left: 4px solid var(--color-accent-2);
+    }
+
+    // Dark Mode Overrides
+    [data-bs-theme="dark"] & {
+        &.section-scenario {
+            background: #1f2937;
+            border-color: #374151;
+            border-left-color: #60a5fa;
+
+            h3 {
+                color: #f3f4f6;
+            }
+
+            p,
+            li {
+                color: #d1d5db;
+            }
+        }
+
+        &.section-question {
+            background: #451a03; // Dark amber bg
+            border-color: #78350f;
+            border-left-color: #fbbf24;
+
+            h3 {
+                color: #fcd34d;
+            }
+
+            p {
+                color: #fffbeb;
+            }
+        }
+
+        &.section-answer {
+            background: #064e3b; // Dark green bg
+            border-color: #065f46;
+            border-left-color: #34d399;
+
+            h3 {
+                color: #a7f3d0;
+            }
+
+            p,
+            li {
+                color: #ecfdf5;
+            }
+        }
+
+        &.section-generic {
+            background: var(--bg-card-dark);
+            border-color: var(--border-dark);
+        }
+    }
+}
+
+// Navigation Footer Hover
+.hover-primary:hover {
+    color: var(--color-primary) !important;
+
+    .fw-semibold {
+        text-decoration: underline;
+    }
+}
+
+// Code Blocks Styling Adjustment
+pre {
+    background: #1e1e1e !important;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// 5. Question Card Grid
+.question-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.question-card {
+    background: var(--bg-card-light);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    // Top Accent Border base
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: #e5e7eb; // default
+        transition: height 0.2s ease;
+    }
+
+    // Difficulty Colors
+    &.level-beginner::before {
+        background: #3b82f6;
+    }
+
+    // Blue
+    &.level-advanced::before,
+    &.level-advance::before {
+        background: #f59e0b;
+    }
+
+    // Amber
+    &.level-expert::before {
+        background: #ef4444;
+    }
+
+    // Red
+
+    // Badge Colors
+    .level-badge {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 100px;
+        color: #fff;
+        opacity: 0.9;
+    }
+
+    &.level-beginner .level-badge {
+        background: #3b82f6;
+    }
+
+    &.level-advanced .level-badge,
+    &.level-advance .level-badge {
+        background: #f59e0b;
+    }
+
+    &.level-expert .level-badge {
+        background: #ef4444;
+    }
+
+    // Hover Effects
+    &:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-color: rgba(99, 102, 241, 0.3); // Subtle purple tint
+
+        &::before {
+            height: 6px;
+        }
+    }
+
+    // Difficulty-Specific Hover Colors
+    &.level-beginner:hover {
+        border-color: #3b82f6;
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+    }
+
+    &.level-advanced:hover,
+    &.level-advance:hover {
+        border-color: #f59e0b;
+        box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+    }
+
+    &.level-expert:hover {
+        border-color: #ef4444;
+        box-shadow: 0 10px 25px rgba(239, 68, 68, 0.2);
+    }
+
+    // Content Structure
+    .card-body {
+        padding: 24px 24px 16px;
+        flex: 1;
+    }
+
+    .card-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--border-light);
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--text-secondary-light);
+    }
+
+    // Typography
+    .card-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary-light);
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .card-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary-light);
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    // Dark Mode
+    [data-bs-theme="dark"] & {
+        background: var(--bg-card-dark);
+        border-color: var(--border-dark);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+        .card-title {
+            color: #f3f4f6;
+        }
+
+        .card-footer {
+            border-color: var(--border-dark);
+            color: #9ca3af;
+        }
+
+        &:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            // Removed generic border-color override to allow specific level colors to shine through
+        }
+    }
+}
