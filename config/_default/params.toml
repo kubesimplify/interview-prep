@@ -4,6 +4,7 @@ description = "Curated interview preparation for Kubernetes, DevOps, and SRE rol
 images = ["cover.png"]
 footer = "Powered by Kubesimplify <a href='https://github.com/kubesimplify/interview-prep'>GitHub</a>"
 
+copyRight = "© 2026 Kubesimplify. All rights reserved."
 # mainSections
 mainSections = ["Interview Prep"]
 
@@ -30,7 +31,7 @@ mainSections = ["Interview Prep"]
   ## Button
   navBarButton = false # false (default) or true
   navBarButtonUrl = "/start-learning/"
-  navBarButtonText = "Get started"
+  navBarButtonText = "Start Learning"
 
   # FlexSearch
   flexSearch = true # true (default) or false
@@ -109,7 +110,7 @@ mainSections = ["Interview Prep"]
   errorLevel = 'ignore' # ignore (default), warning, or error (fails the build)
   highlightBroken = false # true or false (default)
 
-# Images (@thulite/images)
+# Images
 [thulite_images]
   [thulite_images.defaults]
     decoding = "async" # sync, async, or auto (default)
@@ -131,17 +132,18 @@ mainSections = ["Interview Prep"]
     suffix = ""
   [seo.favicons]
     sizes = []
-    icon = "favicon.png" # favicon.png (default)
-    svgIcon = "favicon.svg" # favicon.svg (default)
-    maskIcon = "mask-icon.svg" # mask-icon.svg (default)
+    icon = "" # Disabled - favicon.png is actually an ICO file, not PNG
+    svgIcon = "" # favicon.svg (default) - disabled if file doesn't exist
+    maskIcon = "" # mask-icon.svg (default) - disabled if file doesn't exist
     maskIconColor = "white" # white (default)
   [seo.schemas]
     type = "Organization" # Organization (default) or Person
     logo = "favicon-512x512.png" # Logo of Organization — favicon-512x512.png (default)
-    name = "Thulite" # Name of Organization or Person
-    sameAs = [] # E.g. ["https://github.com/thuliteio/thulite", "https://fosstodon.org/@thulite"]
+    name = "Kubesimplify" # Name of Organization or Person
+    sameAs = ["https://github.com/kubesimplify"]
     images = ["cover.png"] # ["cover.png"] (default)
     #article = [] # Article sections
     #newsArticle = [] # NewsArticle sections
     #blogPosting = [] # BlogPosting sections
     #product = [] # Product sections
+

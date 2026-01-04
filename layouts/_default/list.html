@@ -1,5 +1,6 @@
 {{ define "main" }}
 <section class="container py-5">
+    <!-- Header -->
     <div class="row justify-content-center mb-5">
         <div class="col-lg-8 text-center">
             <h1 class="display-4 fw-bold mb-3">{{ .Title }}</h1>
@@ -7,53 +8,128 @@
         </div>
     </div>
 
-    <div class="bento-grid">
-        {{/* 1. Check for Subsections (Branches) like Beginner/Expert */}}
-        {{ range .Sections }}
+    <!-- 1. Subsections (Learning Tracks/Levels) - Always show if sections exist -->
+    {{ $sections := where .Pages "IsSection" true }}
+    {{ if $sections }}
+    <div class="bento-grid mb-5">
+        {{ range $sections }}
+        {{ $titleKey := lower .Title }}
+
+        {{/* 1. Try Difficulty Config */}}
+        {{ $difficulty := index site.Data.icons.difficulty $titleKey }}
+        {{/* Fix for singular/plural mismatch if needed */}}
+        {{ if eq $titleKey "advance" }}{{ $difficulty = index site.Data.icons.difficulty "advanced" }}{{ end }}
+
+        {{/* 2. Try Domain Config */}}
+        {{ $domain := index site.Data.icons.domains $titleKey }}
+        {{ if not $domain }}
+        {{ range site.Data.icons.domains }}
+        {{ if eq (lower .label) $titleKey }}{{ $domain = . }}{{ end }}
+        {{ end }}
+        {{ end }}
+
+        {{ $iconClass := "fa-solid fa-layer-group" }}
+        {{ $cardColor := "#6366f1" }}
+
+        {{ if $difficulty }}
+        {{ $iconClass = $difficulty.icon }}
+        {{ $cardColor = $difficulty.color }}
+        {{ else if $domain }}
+        {{ $iconClass = $domain.icon }}
+        {{ $cardColor = $domain.color }}
+        {{ end }}
+
         <div class="bento-span-6">
             <a href="{{ .RelPermalink }}" class="text-decoration-none">
-                <div class="premium-card animate-fade-up" style="height: 100%;">
+                <div class="premium-card" style="height: 100%;">
                     <div class="d-flex align-items-center mb-4">
-                        <div class="card-icon me-3 text-primary fs-3 rounded-circle bg-primary-subtle p-3">
-                            <i class="fa-solid fa-layer-group"></i>
+                        <div class="card-icon me-3 fs-3 rounded-circle p-3"
+                            style="background-color: {{ $cardColor }}15; color: {{ $cardColor }};">
+                            <i class="{{ $iconClass }}"></i>
                         </div>
                         <div>
                             <h3 class="mb-1 fw-bold text-body">{{ .Title }}</h3>
-                            <span class="badge bg-light text-primary border">{{ len .Pages }} Questions</span>
+                            <span class="badge border"
+                                style="background-color: var(--bs-body-bg); color: {{ $cardColor }}; border-color: {{ $cardColor }}30 !important;">
+                                {{ len .RegularPages }} Questions
+                            </span>
                         </div>
                     </div>
                     <p class="text-secondary flex-grow-1">
                         {{ .Params.description | default "Click to explore interview questions in this category." }}
                     </p>
-                    <span class="fw-bold text-primary mt-4 d-inline-flex align-items-center">
+                    <span class="fw-bold mt-4 d-inline-flex align-items-center" style="color: {{ $cardColor }};">
                         Start Practicing <i class="fa-solid fa-arrow-right ms-2"></i>
                     </span>
                 </div>
             </a>
         </div>
         {{ end }}
+    </div>
+    {{ else }}
 
-        {{/* 2. Check for Regular Pages (Leaves) - The actual Questions */}}
-        {{ range .Pages }}
-        {{ if not .IsSection }}
-        <div class="bento-span-12">
-            <a href="{{ .RelPermalink }}" class="text-decoration-none">
-                <div class="premium-card animate-fade-up"
-                    style="height: 100%; border-left: 4px solid var(--color-accent);">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <div class="me-3 fs-4 text-secondary">
-                                <i class="fa-regular fa-file-code"></i>
-                            </div>
-                            <h4 class="mb-0 fw-bold text-body">{{ .Title }}</h4>
-                        </div>
-                        <i class="fa-solid fa-chevron-right text-secondary opacity-50"></i>
+    <!-- 2. Questions Grid (Leaves) - Only show if no subsections -->
+    {{ $paginator := .Paginate (where .Pages "IsSection" false) }}
+    {{ if $paginator.Pages }}
+    <div class="question-grid-container">
+        {{ range $paginator.Pages }}
+        {{/* 1. Determine Difficulty Level Config */}}
+        {{ $levelKey := "beginner" }} {{/* Default */}}
+        {{ if in (lower .RelPermalink) "advance" }}{{ $levelKey = "advanced" }}{{ end }}
+        {{ if in (lower .RelPermalink) "expert" }}{{ $levelKey = "expert" }}{{ end }}
+        {{ $diffConfig := index site.Data.icons.difficulty $levelKey }}
+
+        {{/* 2. Determine Domain/Track Config - Map section names to data keys */}}
+        {{ $sectionKey := lower .Section }}
+        {{ if eq $sectionKey "k8s" }}{{ $sectionKey = "kubernetes" }}{{ end }}
+        {{ $domainConfig := index site.Data.icons.domains $sectionKey }}
+
+
+        <a href="{{ .RelPermalink }}" class="text-decoration-none h-100">
+            <article class="question-card level-{{ $levelKey }}"
+                style="--active-color: {{ if $diffConfig }}{{ $diffConfig.color }}{{ else }}#6b7280{{ end }}; border-top-color: {{ if $diffConfig }}{{ $diffConfig.color }}{{ else }}#6b7280{{ end }};">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h2 class="card-title mb-0 me-2">{{ .Title }}</h2>
+                        <span class="level-badge"
+                            style="background-color: {{ if $diffConfig }}{{ $diffConfig.color }}{{ else }}#6b7280{{ end }};">
+                            {{ if $diffConfig }}{{ $diffConfig.label }}{{ else }}Question{{ end }}
+                        </span>
                     </div>
+                    <p class="card-desc">
+                        {{ .Description | default .Summary | truncate 120 }}
+                    </p>
                 </div>
-            </a>
-        </div>
-        {{ end }}
+                <div class="card-footer">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="d-flex align-items-center" title="Estimated Reading Time">
+                            <i class="fa-regular fa-clock me-1"></i> {{ .ReadingTime }} min
+                        </span>
+
+                        {{ if $domainConfig }}
+                        <span class="d-flex align-items-center"
+                            style="font-weight: 500; color: {{ $domainConfig.color }}">
+                            <i class="{{ $domainConfig.icon }} me-1"></i> {{ $domainConfig.label }}
+                        </span>
+                        {{ else }}
+                        <!-- Fallback if domain not found in config -->
+                        <span class="d-flex align-items-center text-muted">
+                            <i class="fa-solid fa-tag me-1"></i> {{ .CurrentSection.Parent.Title }}
+                        </span>
+                        {{ end }}
+
+                    </div>
+                    <i class="fa-solid fa-arrow-right-long opacity-50"></i>
+                </div>
+            </article>
+        </a>
         {{ end }}
     </div>
+
+    <!-- Paginator -->
+    {{ template "_internal/pagination.html" . }}
+    {{ end }}
+    {{ end }}
+
 </section>
 {{ end }}

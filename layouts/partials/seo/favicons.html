@@ -1,0 +1,52 @@
+{{/* Kubesimplify Interview Prep Favicon Logic */}}
+{{/* Standard ICO which exists in static/ usually */}}
+<link rel="icon" href="/favicon.ico" sizes="any">
+
+{{/* SVG Favicon Support */}}
+{{- $svgIconName := default "favicon.svg" .Site.Params.seo.favicons.svgIcon }}
+{{- $svgIco := resources.Get $svgIconName }}
+{{- with $svgIco }}
+<link rel="icon" href="{{ .RelPermalink }}" type="image/svg+xml">
+{{- end }}
+
+{{/* Attempt to handle PNGs if they exist, but SILENTLY fail if not (No Warnings) */}}
+{{- $faviconName := default "favicon.png" .Site.Params.seo.favicons.icon }}
+{{- $favicon := resources.Get $faviconName }}
+{{- if $favicon }}
+{{- if eq .MediaType.MainType "image" }}
+{{- $sizes := slice
+(dict "size" "180x180" "rel" "apple-touch-icon")
+(dict "size" "192x192")
+(dict "size" "512x512")
+}}
+{{- range $sizes}}
+{{- $iconName := printf "/favicon-%s" .size }}
+{{- with .rel }}{{ $iconName = . }}{{ end }}
+{{- $img := $favicon.Resize .size | resources.Copy (printf "%s%s" $iconName (path.Ext $favicon.Name) | relURL) }}
+<link rel="{{ default `icon` .rel }}" href="{{ $img.RelPermalink }}" sizes="{{ .size }}" type="{{ $img.MediaType }}">
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{/* Web Manifest - Kubesimplify Branded */}}
+{{- $templ := `
+{
+"name": "Kubesimplify Interview Prep",
+"short_name": "Interview Prep",
+"lang": "{{ site.LanguageCode | default "en-us" }}",
+"icons": [
+{
+"src": "/favicon.ico",
+"sizes": "32x32",
+"type": "image/x-icon"
+}
+],
+"theme_color": "#ffffff",
+"background_color": "#ffffff",
+"display": "standalone",
+"start_url": "{{ site.Home.RelPermalink }}"
+}
+` }}
+{{- $targetPath := "/manifest.webmanifest" }}
+{{- $res := $templ | resources.FromString $targetPath | resources.ExecuteAsTemplate $targetPath . }}
+<link rel="manifest" href="{{ $res.RelPermalink }}">

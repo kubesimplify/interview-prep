@@ -1,12 +1,12 @@
 {
-  "name": "doks",
-  "version": "1.8.1",
-  "description": "Doks theme",
-  "author": "Thulite",
+  "name": "interview-prep",
+  "version": "1.0.0",
+  "description": "Kubesimplify Interview Prep Platform",
+  "author": "Kubesimplify",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thuliteio/doks.git"
+    "url": "https://github.com/kubesimplify/interview-prep.git"
   },
   "scripts": {
     "create": "hugo new",

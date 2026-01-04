@@ -1,0 +1,176 @@
+{{ define "main" }}
+{{/* Initialize Variables First */}}
+{{ $levelSlug := "beginner" }}
+{{ if in (lower .RelPermalink) "advance" }}{{ $levelSlug = "advanced" }}{{ end }}
+{{ if in (lower .RelPermalink) "expert" }}{{ $levelSlug = "expert" }}{{ end }}
+
+{{ $difficulty := index .Site.Data.icons.difficulty $levelSlug }}
+{{/* Fallback */}}
+{{ if not $difficulty }}
+{{ $difficulty = .Site.Data.icons.difficulty.beginner }}
+{{ end }}
+
+{{/* Domain Logic: Find matching domain config by slug */}}
+{{ $trackSlug := "" }}
+{{ $parts := split .RelPermalink "/" }}
+{{ if ge (len $parts) 2 }}{{ $trackSlug = index $parts 1 }}{{ end }}
+
+{{ $domain := dict }}
+{{ range .Site.Data.icons.domains }}
+{{ if eq .slug $trackSlug }}{{ $domain = . }}{{ end }}
+{{ end }}
+
+<div class="container py-5">
+    <div
+        style="background: #eee; padding: 10px; margin-bottom: 20px; font-family: monospace; font-size: 12px; color: black;">
+        DEBUG INFO:<br>
+        RelPermalink: {{ .RelPermalink }}<br>
+        LevelSlug: {{ $levelSlug }}<br>
+        TrackSlug: {{ $trackSlug }}<br>
+        Domain Found: {{ if $domain }}YES ({{ $domain.label }}){{ else }}NO{{ end }}<br>
+        Difficulty Found: {{ if $difficulty }}YES ({{ $difficulty.label }}){{ else }}NO{{ end }}<br>
+        Data Domains Keys: {{ .Site.Data.icons.domains }}<br>
+    </div>
+    <article class="mx-auto" style="max-width: 900px;">
+
+        <!-- 1. Breadcrumb Hierarchy -->
+        <nav aria-label="breadcrumb" class="mb-3 animate-fade-down">
+            <ol class="breadcrumb mb-0" style="font-size: 0.85rem; font-weight: 500;">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-secondary">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ .Parent.Parent.RelPermalink }}"
+                        class="text-decoration-none text-secondary">{{ .Parent.Parent.Title }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ .Parent.RelPermalink }}"
+                        class="text-decoration-none text-secondary">{{ .Parent.Title }}</a></li>
+                <li class="breadcrumb-item active text-body fw-bold" aria-current="page">{{ .Title }}</li>
+            </ol>
+        </nav>
+
+        <!-- 2. Metadata Header -->
+        <div
+            class="question-meta-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center py-3 mb-4 border-bottom">
+            <!-- Left: Difficulty Badge -->
+            <div class="mb-2 mb-md-0">
+                <span class="badge border px-3 py-2 rounded-pill fw-bold d-inline-flex align-items-center"
+                    style="font-size: 0.75rem; background-color: {{ $difficulty.color }}15; color: {{ $difficulty.color }}; border-color: {{ $difficulty.color }}30 !important;">
+                    <i class="{{ $difficulty.icon }} me-2"></i>
+                    {{ $difficulty.label | upper }}
+                </span>
+            </div>
+
+            <!-- Right: Stats & Actions -->
+            <div class="d-flex align-items-center gap-3 text-secondary" style="font-size: 0.85rem; font-weight: 500;">
+                <span class="d-flex align-items-center">
+                    <i class="fa-regular fa-clock me-1"></i> {{ .ReadingTime }} min
+                </span>
+                <span class="d-flex align-items-center">
+                    {{ if $domain }}
+                    <i class="{{ $domain.icon }} me-1" style="color: {{ $domain.color }};"></i> {{ $domain.label }}
+                    {{ else }}
+                    <i class="fa-solid fa-layer-group me-1 text-primary"></i> {{ .CurrentSection.Parent.Title | default
+                    "General" }}
+                    {{ end }}
+                </span>
+                <button class="btn btn-sm btn-link text-decoration-none text-secondary p-0"
+                    onclick="toggleBookmark(this)" title="Bookmark Question">
+                    <i class="fa-regular fa-star fs-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Question Title -->
+        <h1 class="display-5 fw-bold mb-4 text-body">{{ .Title }}</h1>
+
+        <!-- 4. Main Content (Markdown) -->
+        <!-- Content wrapper for JS targeting -->
+        <div class="question-content">
+            {{ .Content }}
+        </div>
+
+        <!-- 5. Navigation Footer -->
+        <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top">
+            {{ with .PrevInSection }}
+            <a href="{{ .RelPermalink }}"
+                class="text-decoration-none d-flex align-items-center text-secondary hover-primary">
+                <i class="fa-solid fa-arrow-left me-2"></i>
+                <div>
+                    <div class="small text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Previous</div>
+                    <div class="fw-semibold">{{ .Title | truncate 30 }}</div>
+                </div>
+            </a>
+            {{ else }}
+            <div></div> <!-- Spacer -->
+            {{ end }}
+
+            <a href="{{ .Parent.RelPermalink }}"
+                class="btn btn-outline-light text-secondary border rounded-pill px-3 py-1 small">
+                <i class="fa-solid fa-list me-2"></i> All Questions
+            </a>
+
+            {{ with .NextInSection }}
+            <a href="{{ .RelPermalink }}"
+                class="text-decoration-none d-flex align-items-center text-end text-secondary hover-primary">
+                <div>
+                    <div class="small text-muted text-uppercase fw-bold" style="font-size: 0.7rem;">Next</div>
+                    <div class="fw-semibold">{{ .Title | truncate 30 }}</div>
+                </div>
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+            {{ else }}
+            <div></div> <!-- Spacer -->
+            {{ end }}
+        </div>
+
+    </article>
+</div>
+
+<!-- Scripts for Section Grouping & Bookmarking -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Wrap Sections Logic
+        const contentDiv = document.querySelector('.question-content');
+        if (!contentDiv) return;
+
+        const headers = contentDiv.querySelectorAll('h3');
+        headers.forEach(header => {
+            // Create wrapper
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'content-section-wrapper mb-4 p-4 rounded-3 border';
+
+            // Determine type
+            const text = header.innerText.toLowerCase();
+            if (text.includes('scenario')) sectionDiv.classList.add('section-scenario');
+            else if (text.includes('question')) sectionDiv.classList.add('section-question');
+            else if (text.includes('answer') || text.includes('expected')) sectionDiv.classList.add('section-answer');
+            else sectionDiv.classList.add('section-generic');
+
+            // Move header inside
+            header.parentNode.insertBefore(sectionDiv, header);
+            sectionDiv.appendChild(header);
+
+            // Move siblings until next H3 or end
+            let next = sectionDiv.nextElementSibling;
+            while (next && next.tagName !== 'H3') {
+                let current = next;
+                next = next.nextElementSibling;
+                sectionDiv.appendChild(current);
+            }
+        });
+
+        // 2. Syntax Highlighting Enhancement (Optional, if Highlight.js is loaded)
+        // ...
+    });
+
+    // Bookmark Toggle
+    function toggleBookmark(btn) {
+        const icon = btn.querySelector('i');
+        if (icon.classList.contains('fa-regular')) {
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid', 'text-warning');
+        } else {
+            icon.classList.remove('fa-solid', 'text-warning');
+            icon.classList.add('fa-regular');
+        }
+        // Save to local storage logic here in future
+    }
+</script>
+{{ end }}

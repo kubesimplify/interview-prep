@@ -1,4 +1,4 @@
-title = "KubeSimplify"
+title = "Interview Prep"
 baseurl = "http://localhost/"
 disableAliases = true
 disableHugoGeneratorInject = true
@@ -15,7 +15,7 @@ defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
 defaultContentLanguageInSubdir = false
 
-copyRight = "Copyright (c) 2020-2024 Thulite"
+
 
 [build.buildStats]
   enable = true
