@@ -31,7 +31,7 @@
 
         .btn {
             width: 100%;
-            margin: 0 !important; // Override horizontal margins if any
+            margin: 0 !important; 
         }
     }
 }
@@ -82,10 +82,9 @@ body {
     grid-template-columns: repeat(12, 1fr);
     gap: 1.5rem;
     padding: 2rem 0;
-    align-items: stretch; // Ensure rows stretch
+    align-items: stretch; 
 }
 
-// Spans must be flex containers AND have height 100% to fill grid cell
 .bento-span-8,
 .bento-span-4,
 .bento-span-6 {
@@ -122,12 +121,12 @@ body {
     // Tablet (iPad Air/Pro): 2-column layout
     .bento-span-4,
     .bento-span-6 {
-        grid-column: span 6; // 2 items per row
+        grid-column: span 6; 
         height: 100%;
     }
 
     .bento-span-8 {
-        grid-column: span 12; // Larger items take full width on intermediate screens
+        grid-column: span 12; 
         height: 100%;
     }
 }
@@ -141,7 +140,7 @@ body {
     .container-sm,
     .container-xl,
     .container-xxl {
-        max-width: 1520px; // Widen container
+        max-width: 1520px; 
     }
 
     .bento-grid {
@@ -157,11 +156,11 @@ body {
     .container-sm,
     .container-xl,
     .container-xxl {
-        max-width: 1800px; // Very wide for >2k/4k
+        max-width: 1800px; 
     }
 
     .hero-title {
-        font-size: 5rem; // Scale up title
+        font-size: 5rem; 
     }
 }
 
@@ -186,15 +185,14 @@ body {
     background: var(--bg-card-light);
     border: 1px solid var(--border-light);
     border-radius: 16px;
-    padding: clamp(1.5rem, 2vw, 3rem); // Responsive padding (larger on 4k)
+    padding: clamp(1.5rem, 2vw, 3rem); 
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
 
-    // Flex layout for vertical filling
     height: 100%;
     width: 100%;
-    flex: 1 1 auto; // Grow to fill parent
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -234,7 +232,7 @@ body {
 }
 
 .hero-title {
-    font-size: clamp(2.5rem, 5vw, 5rem); // Fluid typography: min 2.5rem, val 5vw, max 5rem
+    font-size: clamp(2.5rem, 5vw, 5rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
@@ -252,7 +250,7 @@ body {
 
     &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(5, 202, 255, 0.5); // Enhanced glow
+        box-shadow: 0 10px 25px rgba(5, 202, 255, 0.5); 
     }
 }
 
@@ -262,7 +260,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    min-height: 54px; // Matches standard btn-lg height usually
+    min-height: 54px; 
     line-height: 1;
 
     // 2. Styling
@@ -293,7 +291,7 @@ body {
         transform: translateY(-3px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         background: rgba(255, 255, 255, 0.5);
-        border-color: #dbeafe; // Light blue tint shift
+        border-color: #dbeafe; 
         color: var(--text-primary-light);
     }
 
@@ -342,18 +340,18 @@ body {
         // Fix alignment on mobile
         @media (max-width: 991px) {
             margin-left: 0.5rem !important;
-            margin-right: 0 !important; // Flush right alignment
+            margin-right: 0 !important; 
         }
     }
 
     // Logo scaling for 4k
     @media (min-width: 2000px) {
         .navbar-brand img {
-            height: 40px !important; // Scale up from 28px
+            height: 40px !important; 
         }
 
         .navbar-brand span {
-            font-size: 1.5rem; // Scale text
+            font-size: 1.5rem; 
         }
     }
 }
@@ -361,15 +359,8 @@ body {
 // The main container that wraps content
 .wrap {
     flex: 1 0 auto;
-    width: 100%; // Ensure it takes full width
+    width: 100%; 
 }
-
-// The footer element
-// ... (previous content)
-
-// ... (previous content)
-
-// 6. Question Detail Page Styles
 
 // Breadcrumb
 .breadcrumb-item a {
@@ -405,12 +396,15 @@ body {
     &.section-scenario {
         background: #f9fafb;
         border: 1px solid #e5e7eb;
-        border-left: 4px solid #3b82f6;
+        border-left: 5px solid #3b82f6; 
+        border-radius: 12px; 
+        padding: 1.5rem; 
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); 
 
         h3::before {
             content: "📋";
-            margin-right: 10px;
-            font-size: 1.2rem;
+            margin-right: 12px;
+            font-size: 1.25rem;
         }
     }
 
@@ -418,23 +412,28 @@ body {
     &.section-question {
         background: #fffbeb;
         border: 1px solid #fcd34d;
-        border-left: 4px solid #f59e0b;
+        border-left: 5px solid #f59e0b;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1); 
 
         h3 {
             color: #92400e;
+            margin-bottom: 1.25rem;
         }
 
         h3::before {
             content: "❓";
-            margin-right: 10px;
-            font-size: 1.2rem;
+            margin-right: 12px;
+            font-size: 1.25rem;
         }
 
         // Make question text slightly larger/clearer
         p {
-            font-size: 1.1rem;
+            font-size: 1.15rem; 
             font-weight: 500;
             color: #1f2937;
+            line-height: 1.7;
         }
     }
 
@@ -442,7 +441,10 @@ body {
     &.section-answer {
         background: #f0fdf4;
         border: 1px solid #bbf7d0;
-        border-left: 4px solid #10b981;
+        border-left: 5px solid #10b981;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1); 
 
         h3 {
             color: #166534;
@@ -450,8 +452,8 @@ body {
 
         h3::before {
             content: "✅";
-            margin-right: 10px;
-            font-size: 1.2rem;
+            margin-right: 12px;
+            font-size: 1.25rem;
         }
     }
 
@@ -480,7 +482,7 @@ body {
         }
 
         &.section-question {
-            background: #451a03; // Dark amber bg
+            background: #451a03; 
             border-color: #78350f;
             border-left-color: #fbbf24;
 
@@ -494,7 +496,7 @@ body {
         }
 
         &.section-answer {
-            background: #064e3b; // Dark green bg
+            background: #064e3b; 
             border-color: #065f46;
             border-left-color: #34d399;
 
@@ -560,7 +562,7 @@ pre {
         left: 0;
         right: 0;
         height: 4px;
-        background: #e5e7eb; // default
+        background: #e5e7eb; 
         transition: height 0.2s ease;
     }
 
@@ -609,7 +611,7 @@ pre {
     // Hover Effects
     &:hover {
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        border-color: rgba(5, 202, 255, 0.3); // Subtle purple tint
+        border-color: rgba(5, 202, 255, 0.3); 
 
         &::before {
             height: 6px;
@@ -686,7 +688,6 @@ pre {
 
         &:hover {
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            // Removed generic border-color override to allow specific level colors to shine through
         }
     }
 }
