@@ -23,6 +23,19 @@
     --ks-glow: 0 0 20px rgba(5, 202, 255, 0.2);
 }
 
+// Mobile/Responsive Mixins/Overrides
+@media (max-width: 575px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+
+        .btn {
+            width: 100%;
+            margin: 0 !important; // Override horizontal margins if any
+        }
+    }
+}
+
 // 2. SCSS Variable Overrides (Bootstrap/Doks)
 $font-family-sans-serif: "Outfit", sans-serif;
 $primary: #05CAFF;
@@ -93,13 +106,62 @@ body {
     grid-column: span 6;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
 
+    // Mobile: Stack everything
     .bento-span-8,
     .bento-span-4,
     .bento-span-6 {
         grid-column: span 12;
-        height: auto; // Reset on mobile
+        height: auto;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    // Tablet (iPad Air/Pro): 2-column layout
+    .bento-span-4,
+    .bento-span-6 {
+        grid-column: span 6; // 2 items per row
+        height: 100%;
+    }
+
+    .bento-span-8 {
+        grid-column: span 12; // Larger items take full width on intermediate screens
+        height: 100%;
+    }
+}
+
+// 4k / Large Screen Optimization
+@media (min-width: 1600px) {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: 1520px; // Widen container
+    }
+
+    .bento-grid {
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 2000px) {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: 1800px; // Very wide for >2k/4k
+    }
+
+    .hero-title {
+        font-size: 5rem; // Scale up title
     }
 }
 
@@ -124,7 +186,7 @@ body {
     background: var(--bg-card-light);
     border: 1px solid var(--border-light);
     border-radius: 16px;
-    padding: 2rem;
+    padding: clamp(1.5rem, 2vw, 3rem); // Responsive padding (larger on 4k)
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
@@ -172,14 +234,10 @@ body {
 }
 
 .hero-title {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 5vw, 5rem); // Fluid typography: min 2.5rem, val 5vw, max 5rem
     line-height: 1.1;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
-
-    @media (max-width: 768px) {
-        font-size: 2.5rem;
-    }
 }
 
 // Button Overrides
@@ -262,6 +320,42 @@ body {
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
+}
+
+// Navbar & Touch Targets
+.navbar {
+
+    // Improve mobile toggle
+    .btn-link.nav-link {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+
+        &:hover,
+        &:focus {
+            background-color: rgba(var(--bs-primary-rgb), 0.1);
+        }
+
+        // Fix alignment on mobile
+        @media (max-width: 991px) {
+            margin-left: 0.5rem !important;
+            margin-right: 0 !important; // Flush right alignment
+        }
+    }
+
+    // Logo scaling for 4k
+    @media (min-width: 2000px) {
+        .navbar-brand img {
+            height: 40px !important; // Scale up from 28px
+        }
+
+        .navbar-brand span {
+            font-size: 1.5rem; // Scale text
+        }
+    }
 }
 
 // The main container that wraps content
