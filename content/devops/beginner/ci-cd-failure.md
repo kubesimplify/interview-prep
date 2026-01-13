@@ -1,6 +1,7 @@
 ---
 title: "CI/CD Pipeline Failure Debugging"
-date: 2023-09-08T10:00:00+00:00
+date: 2026-01-11
+author: "KubeSimplify"
 draft: false
 weight: 1
 description: "A deployment pipeline is failing at the artifact upload stage. How do you troubleshoot?"

@@ -1,6 +1,7 @@
 ---
 title: "Ingress TLS/SSL Verification"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-12
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Configuring HTTPS and debugging certificate errors."

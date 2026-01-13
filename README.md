@@ -33,7 +33,7 @@ Use this guide to set up the project on your local machine for development and c
 
 ### Installation
 
-1. **Clone the Repository**
+1. **Fork the Repository and Clone it locally**
    ```bash
    git clone https://github.com/kubesimplify/interview-prep.git
    cd interview-prep

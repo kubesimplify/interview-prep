@@ -1,6 +1,7 @@
 ---
 title: "Pod Pending State Analysis"
-date: 2023-09-09T10:00:00+00:00
+date: 2026-01-10
+author: "KubeSimplify"
 draft: false
 weight: 1
 description: "A scheduled pod remains in Pending status endlessly. Diagnose the cause."

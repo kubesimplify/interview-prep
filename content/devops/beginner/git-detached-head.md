@@ -1,6 +1,7 @@
 ---
 title: "Git Detached HEAD State"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-10
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Understanding and resolving a detached HEAD state in Git."

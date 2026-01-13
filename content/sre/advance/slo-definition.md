@@ -1,6 +1,7 @@
 ---
 title: "Defining SLOs for a New Service"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-06
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Translating business requirements into Service Level Objectives."

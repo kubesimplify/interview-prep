@@ -1,6 +1,7 @@
 ---
 title: "Zero-Downtime Database Migration"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-09
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Handling schema changes in a high-traffic environment."

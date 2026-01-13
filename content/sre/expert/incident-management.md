@@ -1,6 +1,7 @@
 ---
 title: "Managing a Major Outage"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-03
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Leading the response to a cascading failure."

@@ -1,6 +1,7 @@
 ---
 title: "Etcd Cluster Loss Recovery"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-08
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Disaster recovery for the Kubernetes control plane."

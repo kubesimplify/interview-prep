@@ -1,6 +1,7 @@
 ---
 title: "Service Discovery Failure"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-09
+author: "KubeSimplify"
 draft: false
 weight: 20
 description: "Troubleshooting internal DNS resolution issues."

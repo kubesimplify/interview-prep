@@ -49,6 +49,14 @@
 
             <!-- Right: Stats & Actions -->
             <div class="d-flex align-items-center gap-3 text-secondary" style="font-size: 0.85rem; font-weight: 500;">
+                {{ with .Params.author }}
+                <span class="d-flex align-items-center" title="Author">
+                     <i class="fa-regular fa-user me-1"></i> {{ . }}
+                </span>
+                {{ end }}
+                <span class="d-flex align-items-center" title="Date">
+                    <i class="fa-regular fa-calendar me-1"></i> {{ .Date.Format "Jan 2, 2006" }}
+                </span>
                 <span class="d-flex align-items-center">
                     <i class="fa-regular fa-clock me-1"></i> {{ .ReadingTime }} min
                 </span>

@@ -1,6 +1,7 @@
 ---
 title: "Database Connection Exhaustion"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-07
+author: "KubeSimplify"
 draft: false
 weight: 20
 description: "Debugging a sudden spike in 500 errors related to DB connectivity."
