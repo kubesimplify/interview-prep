@@ -1,6 +1,7 @@
 ---
 title: "Triage: Sustained CPU Spike"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-05
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Initial response and analysis of a high CPU alert."

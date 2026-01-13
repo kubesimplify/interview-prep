@@ -27,6 +27,9 @@ content/
 We welcome new interview scenarios! Please follow these steps:
 
 1.  **Fork the Repository**: click "Fork" on GitHub and clone your fork locally.
+    ```sh
+    git clone https://github.com/your-username/interview-prep.git
+    ```
 2.  **Create a New Branch**: `git checkout -b add-new-question`
 3.  **Choose the Domain and Level**: Decide if your question fits into `devops`, `sre`, or `k8s`, and select the appropriate difficulty (`beginner`, `advance`, `expert`).
 4.  **Create the File**: Create a new `.md` file in the correct directory.
@@ -36,9 +39,10 @@ We welcome new interview scenarios! Please follow these steps:
     ```markdown
     ---
     title: "Descriptive Title of the Question"
-    date: 2023-10-27T10:00:00+00:00
+    date: 2026-01-13
+    author: "Your Name"
     draft: false
-    weight: 10  # Optional: higher numbers appear lower in the list
+    weight: 10
     description: "A one-sentence summary of the scenario."
     ---
 
@@ -54,6 +58,18 @@ We welcome new interview scenarios! Please follow these steps:
     2.  **Solution**: Step 2...
     3.  **Optimization**: Step 3...
     ```
+    
+
+> [!TIP]
+> **Have a different approach?**
+> If you have an alternative solution or a different tool-specific answer (e.g., "AWS Console" vs "Terraform"), please add it as a new section below the existing one:
+>
+> ### Expected Answer 2 (Approach Name)
+>  Provide a structured answer with key points to look for:
+>    1.  **Analysis**: Step 1...
+>    2.  **Solution**: Step 2...
+>    3.  **Optimization**: Step 3...
+
 
 6.  **Verify**: Run `npm run dev` locally and verify your question appears correctly in the list and detailed view.
 7.  **Submit a Pull Request**: Push your branch and open a PR with a clear description of your addition.

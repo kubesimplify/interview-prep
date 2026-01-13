@@ -113,6 +113,7 @@
       "fa-arrow-right",
       "fa-arrow-right-long",
       "fa-brands",
+      "fa-calendar",
       "fa-clock",
       "fa-code-branch",
       "fa-dharmachakra",
@@ -127,6 +128,7 @@
       "fa-server",
       "fa-solid",
       "fa-star",
+      "fa-user",
       "fa-users",
       "flex-column",
       "flex-grow-1",
@@ -288,6 +290,7 @@
     "ids": [
       "buttonColorMode",
       "expected-answer",
+      "expected-answer-based-another-tools",
       "offcanvasNavMain",
       "offcanvasNavMainLabel",
       "query",

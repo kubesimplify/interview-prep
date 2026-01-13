@@ -1,6 +1,7 @@
 ---
 title: "Debug a CrashLoopBackOff"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-11
+author: "KubeSimplify"
 draft: false
 weight: 10
 description: "Resolving common pod startup failures."

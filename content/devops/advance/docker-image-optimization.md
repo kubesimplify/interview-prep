@@ -1,6 +1,7 @@
 ---
 title: "Docker Image Optimization"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-13
+author: "KubeSimplify"
 draft: false
 weight: 20
 description: "Reducing size and improving build speed of Docker images."

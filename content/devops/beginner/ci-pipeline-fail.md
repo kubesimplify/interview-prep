@@ -1,6 +1,7 @@
 ---
 title: "CI Pipeline Random Failures"
-date: 2023-10-27T10:00:00+00:00
+date: 2026-01-11
+author: "KubeSimplify"
 draft: false
 weight: 20
 description: "Diagnosing flaky tests in a CI/CD pipeline."
